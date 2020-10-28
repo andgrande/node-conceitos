@@ -37,7 +37,6 @@ app.get("/repositories", (request, response) => {
 });
 
 app.post("/repositories", (request, response) => {
-  const {id} = v4;
   const { title, url, techs } = request.body;
 
   const repository = {
@@ -84,17 +83,10 @@ app.delete("/repositories/:id", verifyRepositoryId, (request, response) => {
   return response.status(204).send();
 });
 
-app.post("/repositories/:id/like", verifyRepositoryId, (request, response) => {
-  // TODO
+app.post("/repositories/:id/like", verifyRepositoryId, (request, response) => {  
   const { id } = request.params;
 
   const repository = repositories.find(repository => repository.id === id);
-
-  /* if (repositoriesIndex < 0){
-    return status(400).json({ error: "Invalid Id"});
-  } */
-
-  // repositories[repositoriesIndex].likes ++;
   repository.likes ++;
   
   return response.status(200).json({ likes: repository.likes });
